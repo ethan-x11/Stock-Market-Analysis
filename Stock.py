@@ -99,8 +99,23 @@ def result(ticker,LOOKUP_STEP):
     total_sell_profit = final_df["sell_profit"].sum()
     total_profit = total_buy_profit + total_sell_profit
     profit_per_trade = total_profit / len(final_df)
-    
+    fp = (f"{future_price:.2f}$")
     # printing metrics
+    # print(f"Future price after {LOOKUP_STEP} days is {future_price:.2f}$")
+    # print(f"{LOSS} loss:", loss)
+    # print("Mean Absolute Error:", mean_absolute_error)
+    # print("Accuracy score:", accuracy_score)
+    # print("Total buy profit:", total_buy_profit)
+    # print("Total sell profit:", total_sell_profit)
+    # print("Total profit:", total_profit)
+    # print("Profit per trade:", profit_per_trade)
+    return fp
+
+if __name__ == "__main__":
+    ticker = input("Stock Code:")
+    LOOKUP_STEP = int(input("Duration: "))
+    result(ticker,LOOKUP_STEP)
+    data = fetch_data(ticker,LOOKUP_STEP)
     print(f"Future price after {LOOKUP_STEP} days is {future_price:.2f}$")
     print(f"{LOSS} loss:", loss)
     print("Mean Absolute Error:", mean_absolute_error)
@@ -109,13 +124,5 @@ def result(ticker,LOOKUP_STEP):
     print("Total sell profit:", total_sell_profit)
     print("Total profit:", total_profit)
     print("Profit per trade:", profit_per_trade)
-    
-    return future_price
-
-if __name__ == "__main__":
-    ticker = input("Stock Code:")
-    LOOKUP_STEP = input("Duration: ")
-    result(ticker,LOOKUP_STEP)
-    data = fetch_data(ticker,LOOKUP_STEP)
     test_df = data["test_df"]
     plot_graph(test_df,LOOKUP_STEP)

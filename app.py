@@ -21,16 +21,16 @@ def index_get():
 
 @app.post("/predict")
 def predict():
-    stock_name = request.get_json().get("message")
-    duration = request.get_json().get("message")
+    stock_name = request.get_json().get("name")
+    duration = request.get_json().get("duration")
     # TODO: text validation
-    response = result(stock_name , duration)
+    response = result(stock_name ,int(duration))
     message = response
     print("Answer:",response,"\n")
     return jsonify(response)
 
 if __name__ == "__main__":
     if opts['colab-mode']:
-        app.run(debug=True, use_reloader=False, host='0.0.0.0', port='8080')
+        app.run(debug=True, use_reloader=False, host='0.0.0.0', port='80')
     else:
-        app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+        app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 80)))
