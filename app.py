@@ -25,9 +25,9 @@ def predict():
     duration = request.get_json().get("duration")
     # TODO: text validation
     response = result(stock_name ,int(duration))
-    message = response
-    print("Answer:",response,"\n")
-    return jsonify(response)
+    resp ={"price": response}
+    print(f"Future Price for {stock_name}: {response}\n")
+    return jsonify(resp)
 
 if __name__ == "__main__":
     if opts['colab-mode']:
