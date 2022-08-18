@@ -99,15 +99,11 @@ def load_data(ticker, n_steps=50, scale=True, shuffle=True, lookup_step=1, split
     result["X_test"] = result["X_test"][:, :, :len(feature_columns)].astype(np.float32)
     return result
 
-def fetch_data(ticker,LOOKUP_STEP):
+def fetch_data(ticker, LOOKUP_STEP):
     N_STEPS = 50
-    LOOKUP_STEP = 15
     SCALE = True
-    scale_str = f"sc-{int(SCALE)}"
     SHUFFLE = True
-    shuffle_str = f"sh-{int(SHUFFLE)}"
     SPLIT_BY_DATE = False
-    split_by_date_str = f"sbd-{int(SPLIT_BY_DATE)}"
     TEST_SIZE = 0.2
     FEATURE_COLUMNS = ["adjclose", "volume", "open", "high", "low"]
     
@@ -123,6 +119,6 @@ def fetch_data(ticker,LOOKUP_STEP):
 
 if __name__ == "__main__":
     ticker = input("Stock Code:")
-    LOOKUP_STEP = input("Duration: ")
-    fetch_data(ticker,LOOKUP_STEP)
+    duration = int(input("Duration: "))
+    fetch_data(ticker, duration)
     print("Data saved into data folder.")
