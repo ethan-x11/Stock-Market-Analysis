@@ -2,6 +2,6 @@
 
 
 Contributors:
-- Sugato Bagchi[Frontend]
-- Subhanjan Dutta [ML Design]
-- Anusha Bera [ML Design]
+- Sugato Bagchi [ Frontend ]
+- Subhanjan Dutta [ ML Design ]
+- Anusha Bera [ ML Design ]
