@@ -23,7 +23,6 @@ def index_get():
 def predict():
     stock_name = request.get_json().get("name")
     duration = request.get_json().get("duration")
-    # TODO: text validation
     response = result(stock_name ,int(duration))
     resp ={"price": response}
     print(f"Future Price for {stock_name}: {response}\n")
