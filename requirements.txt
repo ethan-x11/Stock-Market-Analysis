@@ -1,6 +1,7 @@
 tensorflow
 keras
 pandas 
+yaml
 numpy 
 matplotlib 
 yahoo_fin 
