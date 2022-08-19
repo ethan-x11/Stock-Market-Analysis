@@ -32,4 +32,5 @@ if __name__ == "__main__":
     if opts['colab-mode']:
         app.run(debug=True, use_reloader=False, host='0.0.0.0', port='80')
     else:
-        app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 80)))
+        app.run(host='0.0.0.0', port='8080')
+        # app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 80)))
