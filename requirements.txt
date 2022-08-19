@@ -1,4 +1,4 @@
-fask
+flask
 flask-cors
 requests
 jsonify
