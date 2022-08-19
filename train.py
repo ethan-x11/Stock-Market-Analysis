@@ -4,36 +4,14 @@ from keras.layers import LSTM
 from keras.callbacks import ModelCheckpoint, TensorBoard
 from data import fetch_data
 from model import create_model
-
-BIDIRECTIONAL = False
+from params import *
     
 def build_model():
-    N_STEPS = 50
-    FEATURE_COLUMNS = ["adjclose", "volume", "open", "high", "low"]
-    # model params
-    N_LAYERS = 2
-    CELL = LSTM
-    UNITS = 256
-    DROPOUT = 0.4
-    LOSS = "huber_loss"
-    OPTIMIZER = "adam"
     # build the model
     model = create_model(N_STEPS, len(FEATURE_COLUMNS), loss=LOSS, units=UNITS, cell=CELL, n_layers=N_LAYERS, dropout=DROPOUT, optimizer=OPTIMIZER, bidirectional=BIDIRECTIONAL)
     return model
     
 def train_model(ticker, LOOKUP_STEP):
-    SCALE = True
-    scale_str = f"sc-{int(SCALE)}"
-    SHUFFLE = True
-    SPLIT_BY_DATE = False
-    # test ratio size, 0.2 is 20%
-    TEST_SIZE = 0.2
-    date_now = time.strftime("%Y-%m-%d")
-
-    ### training parameters
-    BATCH_SIZE = 64
-    EPOCHS = 1
-
     model_name = f"{date_now}_{ticker}_steps{LOOKUP_STEP}"
     if BIDIRECTIONAL:
         model_name += "-b"

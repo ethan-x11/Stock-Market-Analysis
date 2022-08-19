@@ -9,6 +9,7 @@ import numpy as np
 import random
 import pandas as pd
 import time
+from params import *
 
 
 np.random.seed(314)
@@ -105,14 +106,6 @@ def load_data(ticker, n_steps=50, scale=True, shuffle=True, lookup_step=1, split
     return result
 
 def fetch_data(ticker, LOOKUP_STEP):
-    N_STEPS = 50
-    SCALE = True
-    SHUFFLE = True
-    SPLIT_BY_DATE = False
-    TEST_SIZE = 0.2
-    FEATURE_COLUMNS = ["adjclose", "volume", "open", "high", "low"]
-    
-    date_now = time.strftime("%Y-%m-%d")
     ticker_data_filename = os.path.join("data", f"{ticker}_{date_now}.csv")
     
     data = load_data(ticker, N_STEPS, scale=SCALE, split_by_date=SPLIT_BY_DATE, 

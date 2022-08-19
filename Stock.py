@@ -6,12 +6,7 @@ import matplotlib.pyplot as plt
 
 from data import fetch_data
 from train import train_model, build_model
-
-N_STEPS = 50
-# scale feature columns & output price
-SCALE = True
-BIDIRECTIONAL = False
-LOSS = "huber_loss"
+from params import *
 
 def plot_graph(test_df,LOOKUP_STEP):
     plt.plot(test_df[f'true_adjclose_{LOOKUP_STEP}'], c='b')
@@ -67,7 +62,6 @@ def predict(model, data):
     return predicted_price
 
 def result(ticker,LOOKUP_STEP):
-    date_now = time.strftime("%Y-%m-%d")
     model_name = f"{date_now}_{ticker}_steps{LOOKUP_STEP}"
 
     path_to_file = f"results/{model_name}.h5"
