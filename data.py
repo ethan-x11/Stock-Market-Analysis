@@ -1,3 +1,4 @@
+import tensorflow as tf
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 from yahoo_fin import stock_info as si
@@ -5,12 +6,17 @@ from collections import deque
 
 import os
 import numpy as np
-import pandas as pd
 import random
+import pandas as pd
 import time
 
+
+np.random.seed(314)
+tf.random.set_seed(314)
+random.seed(314)
+
 def shuffle_in_unison(a, b):
-    # shuffle two arrays in the same way
+    # shuffle
     state = np.random.get_state()
     np.random.shuffle(a)
     np.random.set_state(state)
@@ -28,8 +34,7 @@ def load_data(ticker, n_steps=50, scale=True, shuffle=True, lookup_step=1, split
         scale (bool): whether to scale prices from 0 to 1, default is True
         shuffle (bool): whether to shuffle the dataset (both training & testing), default is True
         lookup_step (int): the future lookup step to predict, default is 1 (e.g next day)
-        split_by_date (bool): whether we split the dataset into training/testing by date, setting it 
-            to False will split datasets in a random way
+        split_by_date (bool): whether we split the dataset into training/testing by date, setting it to False will split datasets in a random way
         test_size (float): ratio for test data, default is 0.2 (20% testing data)
         feature_columns (list): the list of features to use to feed into the model, default is everything grabbed from yahoo_fin
     """

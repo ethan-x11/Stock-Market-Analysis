@@ -24,9 +24,12 @@ def index_get():
 def predict():
     stock_name = request.get_json().get("name")
     duration = request.get_json().get("duration")
-    response = result(stock_name ,int(duration))
-    resp ={"price": response}
-    print(f"Future Price for {stock_name}: {response}\n")
+    if (int(duration) <= 60 and int(duration) >= 7):
+        response = result(stock_name ,int(duration))
+        resp ={"price": response}
+        print(f"Future Price for {stock_name}: {response}\n")
+    else:
+        resp = {"price":["Invalid Time-Frame"]}
     return jsonify(resp)
 
 if __name__ == "__main__":
