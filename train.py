@@ -1,8 +1,7 @@
 import os
 import time
-import tensorflow as tf
-from tensorflow.keras.layers import LSTM
-from tensorflow.keras.callbacks import ModelCheckpoint, TensorBoard
+from keras.layers import LSTM
+from keras.callbacks import ModelCheckpoint, TensorBoard
 from data import fetch_data
 from model import create_model
 
@@ -11,7 +10,7 @@ BIDIRECTIONAL = False
 def build_model():
     N_STEPS = 50
     FEATURE_COLUMNS = ["adjclose", "volume", "open", "high", "low"]
-    ### model parameters
+    # model params
     N_LAYERS = 2
     CELL = LSTM
     UNITS = 256
@@ -26,9 +25,7 @@ def train_model(ticker, LOOKUP_STEP):
     SCALE = True
     scale_str = f"sc-{int(SCALE)}"
     SHUFFLE = True
-    shuffle_str = f"sh-{int(SHUFFLE)}"
     SPLIT_BY_DATE = False
-    split_by_date_str = f"sbd-{int(SPLIT_BY_DATE)}"
     # test ratio size, 0.2 is 20%
     TEST_SIZE = 0.2
     date_now = time.strftime("%Y-%m-%d")
@@ -41,7 +38,7 @@ def train_model(ticker, LOOKUP_STEP):
     if BIDIRECTIONAL:
         model_name += "-b"
 
-    # create these folders if they does not exist
+    # create folders if !exists
     if not os.path.isdir("results"):
         os.mkdir("results")
     if not os.path.isdir("logs"):
@@ -52,7 +49,7 @@ def train_model(ticker, LOOKUP_STEP):
     # load the data
     data = fetch_data(ticker,LOOKUP_STEP)
 
-    # some tensorflow callbacks
+    # tensorflow callbacks
     checkpointer = ModelCheckpoint(os.path.join("results", f"{model_name}.h5"), save_weights_only=True, save_best_only=True, verbose=1)
 
     tensorboard = TensorBoard(log_dir=os.path.join("logs", model_name))
@@ -67,6 +64,6 @@ def train_model(ticker, LOOKUP_STEP):
 
 if __name__ == "__main__":
     ticker = input("Stock Code: ")
-    LOOKUP_STEP = input("Duration: ")
+    LOOKUP_STEP = int(input("Duration: "))
     train_model(ticker, LOOKUP_STEP)
     print("\nTraining completed. Data saved in < results >.")

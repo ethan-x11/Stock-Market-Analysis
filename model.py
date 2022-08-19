@@ -1,6 +1,5 @@
-import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense, Dropout, Bidirectional
+from keras.models import Sequential
+from keras.layers import LSTM, Dense, Dropout, Bidirectional
 
 def create_model(sequence_length, n_features, units=256, cell=LSTM, n_layers=2, dropout=0.3, loss="mean_absolute_error", optimizer="rmsprop", bidirectional=False):
     model = Sequential()
