@@ -115,7 +115,7 @@ if __name__ == "__main__":
     ticker = input("Stock Code:")
     LOOKUP_STEP = int(input("Duration: "))
     resp = result(ticker,LOOKUP_STEP)
-    print(f"{ticker} Stock Price after {LOOKUP_STEP} day: {resp}$")
+    print(f"{ticker} Stock Price after {LOOKUP_STEP} day: {resp}$ ")
     # data = fetch_data(ticker,LOOKUP_STEP)
     # test_df = data["test_df"]
     # plot_graph(test_df,LOOKUP_STEP)
