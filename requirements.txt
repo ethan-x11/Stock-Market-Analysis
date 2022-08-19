@@ -1,5 +1,7 @@
 fask
 flask-cors
+requests
+jsonify
 tensorflow
 keras
 pandas 
