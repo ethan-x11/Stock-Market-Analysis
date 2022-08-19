@@ -17,7 +17,8 @@ if opts['colab-mode']:
 
 @app.get("/") # route
 def index_get():
-    return render_template("index.html")
+    return "Stock Price Prediction"
+    # return render_template("index.html")
 
 @app.post("/predict")
 def predict():
