@@ -36,3 +36,5 @@ LOSS = "huber_loss"
 OPTIMIZER = "adam"
 BATCH_SIZE = 64
 EPOCHS = 1
+
+graphformat = "png"

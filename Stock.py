@@ -1,20 +1,26 @@
 import os
 import numpy as np
-import time
-
+import base64
 import matplotlib.pyplot as plt
 
 from data import fetch_data
 from train import train_model, build_model
 from params import *
 
-def plot_graph(test_df,LOOKUP_STEP):
-    plt.plot(test_df[f'true_adjclose_{LOOKUP_STEP}'], c='b')
-    plt.plot(test_df[f'adjclose_{LOOKUP_STEP}'], c='r')
+def plot_graph(df, LOOKUP_STEP, name):
+    plt.plot(df[f'true_adjclose_{LOOKUP_STEP}'], c='b')
+    plt.plot(df[f'adjclose_{LOOKUP_STEP}'], c='r')
     plt.xlabel("Days")
     plt.ylabel("Price")
     plt.legend(["Actual Price", "Predicted Price"])
-    plt.show()
+    graph_results_folder = "graphs"
+    if not os.path.isdir(graph_results_folder):
+        os.mkdir(graph_results_folder)
+    graph_filename = os.path.join(graph_results_folder, f"{name}.{graphformat}")
+    plt.savefig(graph_filename)
+    # plt.show()
+    plt.close()
+    return f'{name}.{graphformat}'
     
     
 def get_final_df(model, data,LOOKUP_STEP):
@@ -62,6 +68,7 @@ def predict(model, data):
     return predicted_price
 
 def result(ticker,LOOKUP_STEP):
+    ticker.upper()
     model_name = f"{date_now}_{ticker}_steps{LOOKUP_STEP}"
 
     path_to_file = f"results/{model_name}.h5"
@@ -93,7 +100,9 @@ def result(ticker,LOOKUP_STEP):
     total_sell_profit = final_df["sell_profit"].sum()
     total_profit = total_buy_profit + total_sell_profit
     profit_per_trade = total_profit / len(final_df)
-    fp = (f"{future_price:.2f}$")
+    fp = [(f"{future_price:.2f}$")]
+    graph = plot_graph(final_df,LOOKUP_STEP,model_name)
+    fp.append(graph)
     # print vals
     # print(f"Future price after {LOOKUP_STEP} days is {future_price:.2f}$")
     # print(f"{LOSS} loss:", loss)
@@ -106,7 +115,7 @@ def result(ticker,LOOKUP_STEP):
     return fp
 
 if __name__ == "__main__":
-    ticker = input("Stock Code:")
+    ticker = input("Stock Code: ")
     LOOKUP_STEP = int(input("Duration: "))
     resp = result(ticker,LOOKUP_STEP)
     print(f"{ticker} Stock Price after {LOOKUP_STEP} day: {resp}$ ")

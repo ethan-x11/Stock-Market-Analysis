@@ -8,7 +8,6 @@ import os
 import numpy as np
 import random
 import pandas as pd
-import time
 from params import *
 
 
@@ -26,7 +25,7 @@ def shuffle_in_unison(a, b):
 if not os.path.isdir("data"):
     os.mkdir("data")
     
-def load_data(ticker, n_steps=50, scale=True, shuffle=True, lookup_step=1, split_by_date=True, test_size=0.2, feature_columns=['adjclose', 'volume', 'open', 'high', 'low']):
+def load_data(ticker, n_steps=50, scale=True, shuffle=True, lookup_step=7, split_by_date=True, test_size=0.2, feature_columns=['adjclose', 'volume', 'open', 'high', 'low']):
     """
     Loads data from Yahoo Finance source, as well as scaling, shuffling, normalizing and splitting.
     Params:
@@ -106,6 +105,7 @@ def load_data(ticker, n_steps=50, scale=True, shuffle=True, lookup_step=1, split
     return result
 
 def fetch_data(ticker, LOOKUP_STEP):
+    ticker.upper()
     ticker_data_filename = os.path.join("data", f"{ticker}_{date_now}.csv")
     
     data = load_data(ticker, N_STEPS, scale=SCALE, split_by_date=SPLIT_BY_DATE, 

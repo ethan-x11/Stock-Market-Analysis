@@ -26,10 +26,12 @@ def predict():
     duration = request.get_json().get("duration")
     if (int(duration) <= 60 and int(duration) >= 7):
         response = result(stock_name ,int(duration))
-        resp ={"price": response}
+        price = response[0]
+        graph = response[1]
+        resp ={"price": price, "graph": graph}
         print(f"Future Price for {stock_name}: {response}\n")
     else:
-        resp = {"price":["Invalid Time-Frame"]}
+        resp = {"price":"Invalid Time-Frame"}
     return jsonify(resp)
 
 if __name__ == "__main__":
