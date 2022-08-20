@@ -1,6 +1,5 @@
 import os
 import numpy as np
-import base64
 import matplotlib.pyplot as plt
 
 from data import fetch_data
