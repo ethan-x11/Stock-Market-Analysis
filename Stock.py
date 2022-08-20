@@ -17,7 +17,7 @@ def plot_graph(df, LOOKUP_STEP, name):
         os.mkdir(graph_results_folder)
     graph_filename = os.path.join(graph_results_folder, f"{name}.{graphformat}")
     plt.savefig(graph_filename)
-    # plt.show()
+    plt.show()
     plt.close()
     return f'{name}.{graphformat}'
     
@@ -67,7 +67,7 @@ def predict(model, data):
     return predicted_price
 
 def result(ticker,LOOKUP_STEP):
-    ticker.upper()
+    ticker = ticker.upper()
     model_name = f"{date_now}_{ticker}_steps{LOOKUP_STEP}"
 
     path_to_file = f"results/{model_name}.h5"
